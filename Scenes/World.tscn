@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/paddle.gd" type="Script" id=1]
+[ext_resource path="res://Assets/paddle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Ball.gd" type="Script" id=3]
+[ext_resource path="res://Assets/ball.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 53.311, 12.2888 )
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.018
+
+[node name="World" type="Node"]
+
+[node name="Paddle" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 544 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Paddle"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+shape = SubResource( 1 )
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2( 512, 480 )
+mode = 2
+physics_material_override = SubResource( 2 )
+gravity_scale = 0.0
+linear_velocity = Vector2( 200, -200 )
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 3 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
+polygon = PoolVector2Array( 0, 640, 0, 0, 1024, 0, 1024, 640, 1088, 640, 1088, -64, -64, -64, -64, 640, 0, 640 )
+
+[node name="Tiles" type="Node" parent="."]
+
+[node name="Gray Tiles" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 355, 350 )
+
+[node name="Tile2" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 665, 351 )
+
+[node name="Tile3" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 603, 351 )
+
+[node name="Tile4" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 479, 350 )
+
+[node name="Tile5" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 417, 350 )
+
+[node name="Tile6" parent="Tiles/Gray Tiles" instance=ExtResource( 5 )]
+position = Vector2( 541, 351 )
+
+[node name="Red Tiles" type="Node" parent="Tiles"]
+
+[node name="RedTile2" parent="Tiles/Red Tiles" instance=ExtResource( 5 )]
+position = Vector2( 634, 321 )
+
+[node name="RedTile3" parent="Tiles/Red Tiles" instance=ExtResource( 5 )]
+position = Vector2( 572, 320 )
+
+[node name="RedTile4" parent="Tiles/Red Tiles" instance=ExtResource( 5 )]
+position = Vector2( 510, 319 )
+
+[node name="RedTile5" parent="Tiles/Red Tiles" instance=ExtResource( 5 )]
+position = Vector2( 448, 318 )
+
+[node name="RedTile6" parent="Tiles/Red Tiles" instance=ExtResource( 5 )]
+position = Vector2( 386, 318 )
+
+[node name="Blue Tiles" type="Node" parent="Tiles"]
+
+[node name="BlueTile" parent="Tiles/Blue Tiles" instance=ExtResource( 5 )]
+position = Vector2( 416, 287 )
+
+[node name="BlueTile2" parent="Tiles/Blue Tiles" instance=ExtResource( 5 )]
+position = Vector2( 606, 288 )
+
+[node name="BlueTile3" parent="Tiles/Blue Tiles" instance=ExtResource( 5 )]
+position = Vector2( 543, 288 )
+
+[node name="BlueTile4" parent="Tiles/Blue Tiles" instance=ExtResource( 5 )]
+position = Vector2( 479, 288 )
+
+[node name="Green Tiles" type="Node" parent="Tiles"]
+
+[node name="GreenTile" parent="Tiles/Green Tiles" instance=ExtResource( 5 )]
+position = Vector2( 448, 258 )
+
+[node name="GreenTile2" parent="Tiles/Green Tiles" instance=ExtResource( 5 )]
+position = Vector2( 573, 257 )
+
+[node name="GreenTile3" parent="Tiles/Green Tiles" instance=ExtResource( 5 )]
+position = Vector2( 510, 258 )
+
+[node name="LabelLives" type="Label" parent="."]
+margin_left = 61.5
+margin_top = 67.0
+margin_right = 166.5
+margin_bottom = 121.0
+
+[node name="LabelPoints" type="Label" parent="."]
+margin_left = 66.0
+margin_top = 10.5
+margin_right = 153.0
+margin_bottom = 63.5
+
+[node name="Points" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 22.5
+margin_right = 121.0
+margin_bottom = 86.5
+text = "Points:
+"
+
+[node name="Lives" type="Label" parent="."]
+margin_left = 6.0
+margin_top = 71.9999
+margin_right = 103.0
+margin_bottom = 130.0
+text = "Lives:
+"
